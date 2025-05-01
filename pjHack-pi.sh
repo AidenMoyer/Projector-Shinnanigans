@@ -43,7 +43,7 @@ EOF
 chmod +x "$HOME_DIR/turn_off_hdmi.py"
 chown $USER:$USER "$HOME_DIR/turn_off_hdmi.py"
 
-# 4. Create user-level systemd service
+# 4. Create user-level systemd service file
 echo "Creating user systemd service..."
 sudo -u $USER mkdir -p "$HOME_DIR/.config/systemd/user"
 
@@ -62,11 +62,19 @@ EOF
 
 chown $USER:$USER "$HOME_DIR/.config/systemd/user/turnoffhdmi.service"
 
-# 5. Enable lingering and enable the service
-echo "Enabling user service..."
+# 5. Enable linger and schedule service enable at next login
+echo "Preparing to enable user service at next login..."
 loginctl enable-linger $USER
-sudo -u $USER systemctl --user daemon-reexec
-sudo -u $USER systemctl --user daemon-reload
-sudo -u $USER systemctl --user enable turnoffhdmi.service
 
-echo "pjHack installed. Reboot to verify HDMI turns off after login."
+cat << 'EOF' >> "$HOME_DIR/.bash_profile"
+# Enable HDMI turn-off service on first login
+if ! systemctl --user is-enabled turnoffhdmi.service >/dev/null 2>&1; then
+  systemctl --user daemon-reexec
+  systemctl --user daemon-reload
+  systemctl --user enable turnoffhdmi.service
+fi
+EOF
+
+chown $USER:$USER "$HOME_DIR/.bash_profile"
+
+echo "pjHack installed. Log in as $USER once, then reboot. HDMI will turn off after startup."
