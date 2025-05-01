@@ -13,18 +13,20 @@ apt update && apt install -y wlr-randr
 echo "Creating PiVideoPlay.py..."
 cat << 'EOF' > "$HOME_DIR/PiVideoPlay.py"
 #!/usr/bin/env python3
-import os
+import os 
 import time
 
 video_path = "/home/epsonweb/Videos/Movie.mp4"
 
 # Turn HDMI on
 os.system('wlr-randr --output HDMI-A-1 --on')
+time.sleep(0.25)  # give display time to settle
 
-# Play video full screen and wait until it finishes
+# Play video
 os.system(f'ffplay -fs -autoexit "{video_path}"')
 
-# Turn HDMI off afterward
+# Wait and turn HDMI off
+time.sleep(0.25)
 os.system('wlr-randr --output HDMI-A-1 --off')
 EOF
 
@@ -91,7 +93,7 @@ EOF
 
 chown $USER:$USER "$HOME_DIR/.config/systemd/user/turnoffhdmi.service"
 
-# 6. Enable linger and schedule auto-enablement of the service
+# 6. Enable linger and auto-enable user service on next login
 echo "Preparing to enable user service at next login..."
 loginctl enable-linger $USER
 
