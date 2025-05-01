@@ -11,8 +11,8 @@ ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 # List of projectors with their IPs and passwords (adjust to projectors' IPs and passwords)
 projectors = [
-    {'Teacher': 'Aiden', 'Name': '', 'pj_ip': '192.168.1.229', 'pi_hostname': 'raspberrypi001.local'},
-    #{'Teacher': 'Jace', 'Name': '', 'pj_ip': '192.168.1.240', 'pi_hostname': 'abbys-iphone.local'},
+    {'Teacher': 'Aiden', 'Name': '', 'pj_ip': '192.168.1.229', 'pi_hostname': 'alexs-iphone.local'},
+    {'Teacher': 'Jace', 'Name': '', 'pj_ip': '192.168.1.240', 'pi_hostname': 'abbys-iphone.local'},
 
     # {'Teacher': 'Robotics', 'Name': '', 'pj_ip': '10.10.20.37', 'pi_hostname': ''},
 

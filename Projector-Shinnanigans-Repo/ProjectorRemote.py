@@ -11,8 +11,8 @@ pypjlink.projector.SOURCE_TYPES_REV['3'] = 'digital'
 # List of projectors with their IPs and passwords (adjust to your projectors' IPs and passwords)
 projectors = [
 
-     {'Teacher': 'Aiden', 'Name': '', 'pj_ip': '192.168.1.229', 'pi_hostname': 'raspberrypi001.local'},
-     {'Teacher': 'Jace', 'Name': '', 'pj_ip': '192.168.1.240', 'pi_hostname': 'raspberrypi002.local'},
+     {'Teacher': 'Aiden', 'Name': '', 'pj_ip': '192.168.1.229', 'pi_hostname': 'alexs-iphone.local'},
+     {'Teacher': 'Jace', 'Name': '', 'pj_ip': '192.168.1.240', 'pi_hostname': 'abbys-iphone.local'},
 
     # {'Teacher': 'Robotics', 'Name': '', 'pj_ip': '10.10.20.37', 'pi_hostname': ''},
 
@@ -222,6 +222,7 @@ while projectorInLoop < len(projectors):
         projectors[projectorInLoop]['productName'] = pj.get_product_name()
 
         print(f"{projectorInLoop + 1}. {projectors[projectorInLoop]}")
+        print(f" ")
 
 
         projectorInLoop += 1
