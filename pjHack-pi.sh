@@ -1,40 +1,16 @@
 #!/bin/bash
 
-USER=orangepi
+USER=epsonweb
 HOME_DIR="/home/$USER"
 
-# Step 1: Save HDMI off script
-cat << 'EOF' > $HOME_DIR/turn_off_hdmi.py
-#!/usr/bin/env python3
-import subprocess
-import os
-import time
+echo "Installing pjHack for user: $USER"
 
-# Set display for xrandr
-os.environ["DISPLAY"] = ":0"
-time.sleep(10)
+# Step 1: Install wlr-randr
+echo "Installing wlr-randr..."
+apt update && apt install -y wlr-randr
 
-def turn_off_hdmi():
-    try:
-        output = subprocess.check_output(['xrandr']).decode()
-        for line in output.splitlines():
-            if ' connected' in line and 'HDMI' in line:
-                display_name = line.split()[0]
-                print(f"Turning off display: {display_name}")
-                subprocess.run(['xrandr', '--output', display_name, '--off'], check=True)
-                print("HDMI output turned off.")
-                return
-        print("No HDMI display found.")
-    except subprocess.CalledProcessError as e:
-        print("xrandr command failed:", e)
-    except FileNotFoundError:
-        print("xrandr not installed or not in PATH.")
-
-if __name__ == '__main__':
-    turn_off_hdmi()
-EOF
-
-# Step 2: Save PiVideoPlay.py
+# Step 2: Create PiVideoPlay.py
+echo "Creating PiVideoPlay.py..."
 cat << 'EOF' > $HOME_DIR/PiVideoPlay.py
 #!/usr/bin/env python3
 import os
@@ -42,27 +18,50 @@ video_path = "/home/epsonweb/Videos/Movie.mp4"
 os.system(f'ffplay -fs "{video_path}"')
 EOF
 
-# Step 3: Make both scripts executable
-chmod +x $HOME_DIR/turn_off_hdmi.py
 chmod +x $HOME_DIR/PiVideoPlay.py
+chown $USER:$USER $HOME_DIR/PiVideoPlay.py
 
-# Step 4: Create autostart directory
-mkdir -p $HOME_DIR/.config/autostart
+# Step 3: Create turn_off_hdmi.py
+echo "Creating turn_off_hdmi.py..."
+cat << 'EOF' > $HOME_DIR/turn_off_hdmi.py
+#!/usr/bin/env python3
+import subprocess
+import time
 
-# Step 5: Create .desktop entry for HDMI-off script
-cat << EOF > $HOME_DIR/.config/autostart/turn_off_hdmi.desktop
-[Desktop Entry]
-Type=Application
-Name=Turn Off HDMI
-Exec=python3 $HOME_DIR/turn_off_hdmi.py
-X-GNOME-Autostart-enabled=true
+time.sleep(5)
+
+def turn_off_hdmi():
+    try:
+        subprocess.run(['wlr-randr', '--output', 'HDMI-A-1', '--off'], check=True)
+    except Exception as e:
+        print(f"Failed to turn off HDMI: {e}")
+
+if __name__ == '__main__':
+    turn_off_hdmi()
 EOF
 
-# Step 6: Set correct ownership
+chmod +x $HOME_DIR/turn_off_hdmi.py
 chown $USER:$USER $HOME_DIR/turn_off_hdmi.py
-chown $USER:$USER $HOME_DIR/PiVideoPlay.py
-chown $USER:$USER $HOME_DIR/.config/autostart/turn_off_hdmi.desktop
 
-echo "✅ Setup complete:"
-echo "  • turn_off_hdmi.py will run at desktop login"
-echo "  • PiVideoPlay.py is ready in $HOME_DIR"
+# Step 4: Create systemd service
+echo "Creating systemd service..."
+cat << EOF > /etc/systemd/system/turnoffhdmi.service
+[Unit]
+Description=Turn off HDMI using wlr-randr
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 $HOME_DIR/turn_off_hdmi.py
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Step 5: Enable service
+systemctl daemon-reexec
+systemctl daemon-reload
+systemctl enable turnoffhdmi.service
+
+echo "pjHack install complete. Reboot to test HDMI auto-off."
