@@ -43,7 +43,26 @@ EOF
 chmod +x "$HOME_DIR/turn_off_hdmi.py"
 chown $USER:$USER "$HOME_DIR/turn_off_hdmi.py"
 
-# 4. Create user-level systemd service file
+# 4. Create turn_on_hdmi.py
+echo "Creating turn_on_hdmi.py..."
+cat << 'EOF' > "$HOME_DIR/turn_on_hdmi.py"
+#!/usr/bin/env python3
+import subprocess
+
+def turn_on_hdmi():
+    try:
+        subprocess.run(['wlr-randr', '--output', 'HDMI-A-1', '--on'], check=True)
+    except Exception as e:
+        print(f"Failed to turn on HDMI: {e}")
+
+if __name__ == '__main__':
+    turn_on_hdmi()
+EOF
+
+chmod +x "$HOME_DIR/turn_on_hdmi.py"
+chown $USER:$USER "$HOME_DIR/turn_on_hdmi.py"
+
+# 5. Create systemd user service
 echo "Creating user systemd service..."
 sudo -u $USER mkdir -p "$HOME_DIR/.config/systemd/user"
 
@@ -62,7 +81,7 @@ EOF
 
 chown $USER:$USER "$HOME_DIR/.config/systemd/user/turnoffhdmi.service"
 
-# 5. Enable linger and schedule service enable at next login
+# 6. Enable linger and schedule auto-enablement of the service
 echo "Preparing to enable user service at next login..."
 loginctl enable-linger $USER
 
@@ -77,4 +96,4 @@ EOF
 
 chown $USER:$USER "$HOME_DIR/.bash_profile"
 
-echo "pjHack installed. Log in as $USER once, then reboot. HDMI will turn off after startup."
+echo "pjHack installed. Log in once as $USER, then reboot. HDMI will turn off after startup."
