@@ -10,24 +10,46 @@ pypjlink.projector.SOURCE_TYPES_REV['3'] = 'digital'
 
 # List of projectors with their IPs and passwords (adjust to your projectors' IPs and passwords)
 projectors = [
-      {'ip': '192.168.1.229', 'password': 'password', 'Name': '', 'Teacher': 'Aiden', 'Power': ''},
-     #{'ip': '10.10.20.37', 'password': 'password', 'Name': '', 'Teacher': 'Robotics', 'Power': ''},
-      {'ip': '192.168.1.240', 'password': 'password', 'Name': '', 'Teacher': 'Jace', 'Power': ''}, 
-    #  {'ip': '10.10.20.40', 'password': 'password', 'Name': '', 'Teacher': 'Welch', 'Power': ''},
-    #  {'ip': '10.10.20.59', 'password': 'password', 'Name': '', 'Teacher': 'Media Center', 'Power': ''}, #Left Wall
-    #  {'ip': '10.10.20.20', 'password': 'password', 'Name': '', 'Teacher': 'Shizler', 'Power': ''}, 
-    #  {'ip': '10.10.20.21', 'password': 'password', 'Name': '', 'Teacher': 'Sensory Room', 'Power': ''}, 
-    #  {'ip': '10.10.20.22', 'password': 'password', 'Name': '', 'Teacher': 'Green', 'Power': ''},
-    #  {'ip': '10.10.20.23', 'password': 'password', 'Name': '', 'Teacher': 'Neimith', 'Power': ''},
-    #  {'ip': '10.10.20.24', 'password': 'password', 'Name': '', 'Teacher': 'Brown', 'Power': ''},
-    #  {'ip': '10.10.20.25', 'password': 'password', 'Name': '', 'Teacher': 'Stanbaugh', 'Power': ''},
-    #  {'ip': '10.10.20.28', 'password': 'password', 'Name': '', 'Teacher': '', 'Power': ''},
-    #  {'ip': '10.10.20.29', 'password': 'password', 'Name': '', 'Teacher': '', 'Power': ''},
-    #  {'ip': '10.10.20.30', 'password': 'password', 'Name': '', 'Teacher': '', 'Power': ''},
-    #  {'ip': '10.10.20.31', 'password': 'password', 'Name': '', 'Teacher': '', 'Power': ''},
-    #  {'ip': '10.10.20.32', 'password': 'password', 'Name': '', 'Teacher': 'Nugent', 'Power': ''},
-    #  {'ip': '10.10.20.33', 'password': 'password', 'Name': '', 'Teacher': '', 'Power': ''},
+
+     {'Teacher': 'Aiden', 'Name': '', 'pj_ip': '192.168.1.229', 'pi_hostname': 'raspberrypi001.local'},
+     {'Teacher': 'Jace', 'Name': '', 'pj_ip': '192.168.1.240', 'pi_hostname': 'raspberrypi002.local'},
+
+    # {'Teacher': 'Robotics', 'Name': '', 'pj_ip': '10.10.20.37', 'pi_hostname': ''},
+
+    # {'Teacher': 'Shizler', 'Name': '', 'pj_ip': '10.10.20.20', 'pi_hostname': ''},
+    # {'Teacher': 'Green', 'Name': '', 'pj_ip': '10.10.20.22', 'pi_hostname': ''},
+    # {'Teacher': 'Neimith', 'Name': '', 'pj_ip': '10.10.20.23', 'pi_hostname': ''},
+    # {'Teacher': 'Brown', 'Name': '', 'pj_ip': '10.10.20.24', 'pi_hostname': ''},
+    # {'Teacher': 'Stanbaugh', 'Name': '', 'pj_ip': '10.10.20.25', 'pi_hostname': ''},
+    # {'Teacher': 'Davids', 'Name': '', 'pj_ip': '10.10.20.28', 'pi_hostname': ''},
+    # {'Teacher': 'Fuller', 'Name': '', 'pj_ip': '10.10.20.30', 'pi_hostname': ''},
+    # {'Teacher': 'Honz', 'Name': '', 'pj_ip': '10.10.20.31', 'pi_hostname': ''},
+    # {'Teacher': 'Nugent', 'Name': '', 'pj_ip': '10.10.20.32', 'pi_hostname': ''},
+    # {'Teacher': 'Polasek', 'Name': '', 'pj_ip': '10.10.20.33', 'pi_hostname': ''},
+    # {'Teacher': 'Gorzen', 'Name': '', 'pj_ip': '10.10.20.35', 'pi_hostname': ''},
+    # {'Teacher': 'DeGroot', 'Name': '', 'pj_ip': '10.10.20.36', 'pi_hostname': ''},
+    # {'Teacher': 'Band', 'Name': '', 'pj_ip': '10.10.20.38', 'pi_hostname': ''},
+    # {'Teacher': 'Lowe', 'Name': '', 'pj_ip': '10.10.20.39', 'pi_hostname': ''},
+    # {'Teacher': 'Welch', 'Name': '', 'pj_ip': '10.10.20.40', 'pi_hostname': ''},
+    # {'Teacher': 'Porchic', 'Name': '', 'pj_ip': '10.10.20.41', 'pi_hostname': ''},
+    # {'Teacher': 'Davlin', 'Name': '', 'pj_ip': '10.10.20.42', 'pi_hostname': ''},
+    # {'Teacher': 'Novara', 'Name': '', 'pj_ip': '10.10.20.43', 'pi_hostname': ''},
+    # {'Teacher': 'Brookes', 'Name': '', 'pj_ip': '10.10.20.44', 'pi_hostname': ''},
+    # {'Teacher': 'Thorp', 'Name': '', 'pj_ip': '10.10.20.45', 'pi_hostname': ''},
+    # {'Teacher': 'Simions', 'Name': '', 'pj_ip': '10.10.20.46', 'pi_hostname': ''},
+    # {'Teacher': 'Rockey', 'Name': '', 'pj_ip': '10.10.20.51', 'pi_hostname': ''},
+    # {'Teacher': 'Pulling', 'Name': '', 'pj_ip': '10.10.20.52', 'pi_hostname': ''},
+    # {'Teacher': 'Bolthouse', 'Name': '', 'pj_ip': '10.10.20.53', 'pi_hostname': ''},
+    # {'Teacher': 'McNammera', 'Name': '', 'pj_ip': '10.10.20.54', 'pi_hostname': ''},
+    # {'Teacher': 'Kimmil', 'Name': '', 'pj_ip': '10.10.20.55', 'pi_hostname': ''},
+    # {'Teacher': 'Pohl', 'Name': '', 'pj_ip': '10.10.20.56', 'pi_hostname': ''},
+    # {'Teacher': 'Media Center', 'Name': '', 'pj_ip': '10.10.20.59', 'pi_hostname': ''},
+
 ]
+
+pj_password = 'password'
+pi_username = 'epsonweb'
+pi_password = 'admin'
 
 #   Creates timer for spacing between commands
 def timer(length):
@@ -116,7 +138,7 @@ def mute():
         mute()
 
 def network():
-    #print(pj.get_inputs())
+    print(pj.get_inputs())
     print(f"Current Input: {pj.get_input()}")
     print(f"1. RGB 1")
     print(f"2. RGB 2")
@@ -191,19 +213,22 @@ projectorInLoop = 0
 while projectorInLoop < len(projectors):
     try:
           # Create a Projector instance for given projector
-        pj = pypjlink.Projector.from_address(projectors[projectorInLoop]['ip'])
-        pj.authenticate(projectors[projectorInLoop]['password'])
+        pj = pypjlink.Projector.from_address(projectors[projectorInLoop]['pj_ip'])
+        pj.authenticate(pj_password)
 
         # Sets name and power to projector
         projectors[projectorInLoop]['Name'] = pj.get_name()
         projectors[projectorInLoop]['Power'] = pj.get_power()
+        projectors[projectorInLoop]['productName'] = pj.get_product_name()
 
         print(f"{projectorInLoop + 1}. {projectors[projectorInLoop]}")
 
 
         projectorInLoop += 1
+        
     
     except Exception as e: 
+        print(e)
         print(f"{projectorInLoop + 1}. {projectors[projectorInLoop]} MISSING")
         projectorInLoop += 1
 
@@ -219,11 +244,9 @@ if inputedProjector == (len(projectors)):
 
 else: 
      # Create a Projector instance for given projector
-    pj = pypjlink.Projector.from_address(projectors[inputedProjector]['ip'])
+    pj = pypjlink.Projector.from_address(projectors[inputedProjector]['pj_ip'])
 
     # Set password if required
-    pj.authenticate(projectors[inputedProjector]['password'])
-
-    print(projectors[inputedProjector])
+    pj.authenticate(pj_password)
 
     remote()

@@ -14,8 +14,18 @@ echo "Creating PiVideoPlay.py..."
 cat << 'EOF' > "$HOME_DIR/PiVideoPlay.py"
 #!/usr/bin/env python3
 import os
+import time
+
 video_path = "/home/epsonweb/Videos/Movie.mp4"
-os.system(f'ffplay -fs "{video_path}"')
+
+# Turn HDMI on
+os.system('wlr-randr --output HDMI-A-1 --on')
+
+# Play video full screen and wait until it finishes
+os.system(f'ffplay -fs -autoexit "{video_path}"')
+
+# Turn HDMI off afterward
+os.system('wlr-randr --output HDMI-A-1 --off')
 EOF
 
 chmod +x "$HOME_DIR/PiVideoPlay.py"

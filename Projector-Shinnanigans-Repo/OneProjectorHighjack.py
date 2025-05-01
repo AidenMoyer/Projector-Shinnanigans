@@ -6,7 +6,7 @@ import time
 #   "D:\Projector\OneProjectorHighjack.py"
 
 projectors = [
-      {'pj-ip': '192.168.1.229', 'pj-password': 'password', 'Name': '', 'Teacher': 'Aiden', 'Power': '', 'pi-username': 'epsonweb', 'pi-password': 'admin', 'pi-ip': 'raspberrypi001.local'},
+      {'pj-ip': '192.168.1.229', 'pj-password': 'password', 'Name': '', 'Teacher': 'Aiden', 'Power': '', 'pi-username': 'epsonweb', 'pi-password': 'admin', 'pi-ip': 'raspberrypi002.local'},
       #{'pj-ip': '192.168.1.240', 'pj-password': 'password', 'Name': '', 'Teacher': 'Jace', 'Power': '', 'pi-username': 'epsonweb', 'pi-password': 'admin', 'pi-ip': '192.168.1.202'}, 
 ]
 
@@ -47,11 +47,6 @@ for projector in projectors:
         print(f'Turning on...')
         timer(20)
 
-        # while 'balls' != 'on':
-        #     print(f'This fucker ran')
-        #     print(pj.get_power())
-        #     timer(15)
-
 
         #Checks power status until on
         while True:
@@ -67,7 +62,6 @@ for projector in projectors:
                 # print(f"Projector is:  {pj.get_power()}")
 
         #Gets then sets then changes the input
-        print(f'Bitch')
         print(f"Current Input: {pj.get_input()}")
 
         if ('DIGITAL', 3) in pj.get_inputs():
@@ -92,4 +86,4 @@ for projector in projectors:
       
     
     except Exception as e:
-       print(f"Failed to communicate with projector at {projector['pj-ip']}. Error: {str(e)}")
+       print(f"Error: {str(e)}")
